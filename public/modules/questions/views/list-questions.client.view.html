@@ -2,8 +2,8 @@
     <div class="list-group">
         <a data-ng-repeat="question in questions" data-ng-href="#!/questions/{{question._id}}" class="list-group-item">
 			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="question.created | date:'medium'"></span>
+				Asked
+				<span am-time-ago="question.created"></span>
 				by
 				<span data-ng-bind="question.user.displayName"></span>
 			</small>
