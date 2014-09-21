@@ -68,6 +68,6 @@ angular.module('answers').controller('AnswersController', ['$scope', '$statePara
 			$scope.answers = Answers.query({
 				question: $stateParams.questionID
 			});
-		}
+		};
 	}
 ]);
