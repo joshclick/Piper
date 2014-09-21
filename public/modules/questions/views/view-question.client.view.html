@@ -1,7 +1,5 @@
 <section data-ng-controller="QuestionsController" data-ng-init="findOne()">
-  <div class="page-header">
-    <h1 data-ng-bind="question.name"></h1>
-  </div>
+  <h2 data-ng-bind="question.name"></h2>
   <div class="pull-right" data-ng-show="authentication.user._id == question.user._id">
     <a class="btn btn-primary" href="/#!/questions/{{question._id}}/edit">
       <i class="glyphicon glyphicon-edit"></i>
@@ -29,12 +27,7 @@
         <h4 class="list-group-item-heading" data-ng-bind="answer.name"></h4>
 
         <div class="pull-right" data-ng-show="authentication.user._id == answer.user._id">
-          <a class="btn btn-primary" href="/#!/answers/{{answer._id}}/edit">
-            <i class="glyphicon glyphicon-edit"></i>
-          </a>
-          <a class="btn btn-primary" data-ng-click="remove();">
-            <i class="glyphicon glyphicon-trash"></i>
-          </a>
+          <a class="btn btn-primary" href="/#!/answers/{{answer._id}}/edit">edit</a>
         </div>
         <small>
           <em class="text-muted">
