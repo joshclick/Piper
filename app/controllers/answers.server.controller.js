@@ -72,7 +72,19 @@ exports.delete = function(req, res) {
 /**
  * List of Answers
  */
-exports.list = function(req, res) { Answer.find().sort('-created').populate('user', 'displayName').exec(function(err, answers) {
+exports.list = function(req, res) { Answer.find().sort('-created').populate('user', 'username').exec(function(err, answers) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(answers);
+		}
+	});
+};
+
+exports.forQuestion = function(req, res) {
+	Answer.find({ question: req.question }).sort('-created').populate('user', 'username').exec(function(err, answers) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -86,7 +98,7 @@ exports.list = function(req, res) { Answer.find().sort('-created').populate('use
 /**
  * Answer middleware
  */
-exports.answerByID = function(req, res, next, id) { Answer.findById(id).populate('user', 'displayName').exec(function(err, answer) {
+exports.answerByID = function(req, res, next, id) { Answer.findById(id).populate('user', 'username').exec(function(err, answer) {
 		if (err) return next(err);
 		if (! answer) return next(new Error('Failed to load Answer ' + id));
 		req.answer = answer ;

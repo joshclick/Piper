@@ -1,8 +1,8 @@
 'use strict';
 
 // Answers controller
-angular.module('answers').controller('AnswersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Answers',
-	function($scope, $stateParams, $location, Authentication, Answers ) {
+angular.module('answers').controller('AnswersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Answers', 'QuestionAnswers',
+		function($scope, $stateParams, $location, Authentication, Answers, QuestionAnswers ) {
 		$scope.authentication = Authentication;
 
 		// Create new Answer
@@ -10,7 +10,7 @@ angular.module('answers').controller('AnswersController', ['$scope', '$statePara
 			// Create new Answer object
 			var answer = new Answers ({
 				name: this.name,
-				question: $stateParams.questionID
+				question: $stateParams.questionId,
 			});
 
 			// Redirect after save
@@ -65,8 +65,8 @@ angular.module('answers').controller('AnswersController', ['$scope', '$statePara
 		};
 
 		$scope.findFor = function() {
-			$scope.answers = Answers.query({
-				question: $stateParams.questionID
+			$scope.answers = QuestionAnswers.query({
+				questionId: $stateParams.questionId
 			});
 		};
 	}
