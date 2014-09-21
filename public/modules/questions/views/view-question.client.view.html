@@ -1,0 +1,63 @@
+<section data-ng-controller="QuestionsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="question.name"></h1>
+	</div>
+	<div class="pull-right" data-ng-show="authentication.user._id == question.user._id">
+		<a class="btn btn-primary" href="/#!/questions/{{question._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="question.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="question.user.displayName"></span>
+		</em>
+	</small>
+</section>
+
+<section data-ng-controller="AnswersController" data-ng-init="findFor()">
+    <div class="page-header">
+        <h1>Answers</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="answer in answers" data-ng-href="#!/answers/{{answer._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="answer.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="answer.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="answer.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!answers.$resolved || answers.length">
+    	No Answers yet, why don't you <a href="/#!/answers/create">create one</a>?
+    </div>
+
+    <div class="page-header">
+        <h1>New Answer</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>
