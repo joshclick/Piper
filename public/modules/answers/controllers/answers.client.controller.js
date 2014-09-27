@@ -13,9 +13,7 @@ angular.module('answers').controller('AnswersController', ['$scope', '$statePara
 				question: $stateParams.questionId,
 			});
 
-			// Redirect after save
 			answer.$save(function(response) {
-				// $location.path('answers/' + response._id);
 				$scope.findFor();
 
 				// Clear form fields

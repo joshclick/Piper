@@ -30,6 +30,22 @@
         <div class="pull-right" data-ng-show="authentication.user._id == answer.user._id">
           <a class="btn btn-primary" href="/#!/answers/{{answer._id}}/edit">edit</a>
         </div>
+
+        <div data-ng-controller="VotesController" data-ng-init="findFor(answer._id)">
+          Votes: {{ votes.length }}
+          <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+              <input type="hidden" data-ng-model="answer._id" id="answer">
+              <div class="form-group">
+                  <input type="submit" class="btn btn-default" value="vote">
+              </div>
+              <div data-ng-show="error" class="text-danger">
+                <strong data-ng-bind="error"></strong>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+
         <small>
           <em class="text-muted">
             Answered
