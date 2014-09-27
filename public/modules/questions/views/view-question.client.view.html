@@ -19,6 +19,7 @@
 </section>
 
 <section data-ng-controller="AnswersController" data-ng-init="findFor()">
+  <section ng-show="answers.length">
     <div class="page-header">
         <h4>{{ answers.length }} Answers</h4>
     </div>
@@ -39,7 +40,8 @@
         </small>
       </div>
     </div>
-
+  </section>
+  <section>
     <div class="col-md-12">
       <h4>Your Answer</h4>
       <form class="form-horizontal" data-ng-submit="create()" novalidate>
@@ -59,4 +61,5 @@
           </fieldset>
       </form>
     </div>
+  </section>
 </section>
