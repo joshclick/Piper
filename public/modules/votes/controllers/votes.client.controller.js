@@ -62,6 +62,10 @@ angular.module('votes').controller('VotesController', ['$scope', '$stateParams',
 		$scope.findFor = function(answerId) {
 			$scope.votes = AnswerVotes.query({
 				answerId: answerId
+			}, function(votes) {
+				$scope.myVote = votes.filter(function(vote) {
+					return vote.user.username == user.username;
+				});
 			});
 		};
 	}

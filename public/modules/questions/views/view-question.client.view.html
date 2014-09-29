@@ -25,26 +25,26 @@
     </div>
     <div class="list-group">
       <div data-ng-repeat="answer in answers" class="list-group-item">
+        <div class="pull-right">
+          <a class="btn btn-primary"  data-ng-show="authentication.user._id == answer.user._id" href="/#!/answers/{{answer._id}}/edit">edit</a>
+          <div data-ng-controller="VotesController" data-ng-init="findFor(answer._id)">
+            Votes: {{ votes.length }}
+            <form class="form-horizontal" data-ng-submit="create()" novalidate>
+              <fieldset>
+                <input type="hidden" data-ng-model="answer._id" id="answer">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default" value="vote" ng-show="myVote.length == 0">
+                    <!-- enable toggle -->
+                </div>
+                <div data-ng-show="error" class="text-danger">
+                  <strong data-ng-bind="error"></strong>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+
         <h4 class="list-group-item-heading" data-ng-bind="answer.name"></h4>
-
-        <div class="pull-right" data-ng-show="authentication.user._id == answer.user._id">
-          <a class="btn btn-primary" href="/#!/answers/{{answer._id}}/edit">edit</a>
-        </div>
-
-        <div data-ng-controller="VotesController" data-ng-init="findFor(answer._id)">
-          Votes: {{ votes.length }}
-          <form class="form-horizontal" data-ng-submit="create()" novalidate>
-            <fieldset>
-              <input type="hidden" data-ng-model="answer._id" id="answer">
-              <div class="form-group">
-                  <input type="submit" class="btn btn-default" value="vote">
-              </div>
-              <div data-ng-show="error" class="text-danger">
-                <strong data-ng-bind="error"></strong>
-              </div>
-            </fieldset>
-          </form>
-        </div>
 
         <small>
           <em class="text-muted">

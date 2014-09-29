@@ -13,3 +13,7 @@
 .ng-valid.ng-dirty{
     border-color:#78FA89;
 }
+
+.list-group-item {
+  height: 110px;
+}
