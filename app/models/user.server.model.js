@@ -31,6 +31,10 @@ var UserSchema = new Schema({
     required: 'Please fill in a username',
     trim: true
   },
+  points: {
+    type: Number,
+    default: 0
+  },
   password: {
     type: String,
     default: '',

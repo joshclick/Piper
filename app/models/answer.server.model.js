@@ -16,6 +16,10 @@ var AnswerSchema = new Schema({
 		required: 'Please fill Answer name',
 		trim: true
 	},
+	points: {
+    type: Number,
+    default: 0
+  },
 	created: {
 		type: Date,
 		default: Date.now

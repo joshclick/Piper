@@ -4,6 +4,7 @@
 angular.module('answers').controller('AnswersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Answers', 'QuestionAnswers',
 		function($scope, $stateParams, $location, Authentication, Answers, QuestionAnswers ) {
 		$scope.authentication = Authentication;
+		$scope.user = Authentication.user;
 
 		// Create new Answer
 		$scope.create = function() {
@@ -65,6 +66,21 @@ angular.module('answers').controller('AnswersController', ['$scope', '$statePara
 		$scope.findFor = function() {
 			$scope.answers = QuestionAnswers.query({
 				questionId: $stateParams.questionId
+			});
+		};
+
+		$scope.addPoints = function() {
+			var answer = $scope.answer;
+
+			if ($scope.user.points > 10) {
+				answer.points += 10;
+				$scope.user.points -= 10;
+			}
+
+			answer.$update(function() {
+				$location.path('answers/' + answer._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
 			});
 		};
 	}

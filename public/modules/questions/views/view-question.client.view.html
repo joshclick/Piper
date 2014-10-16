@@ -26,7 +26,10 @@
     <div class="list-group">
       <div data-ng-repeat="answer in answers" class="list-group-item">
         <div class="pull-right">
-          <a class="btn btn-primary"  data-ng-show="authentication.user._id == answer.user._id" href="/#!/answers/{{answer._id}}/edit">edit</a>
+          <input data-ng-controller="AnswersController" type="submit" data-ng-model="newPoints" class="btn btn-default" value="Donate Points" data-ng-submit="addPoints()">
+          <div ng-show="answer.points > 0">
+            Points: {{ answer.points }}
+          </div>
           <div data-ng-controller="VotesController" data-ng-init="findFor(answer._id)">
             Votes: {{ votes.length }}
             <form class="form-horizontal" data-ng-submit="create()" novalidate>
@@ -35,9 +38,6 @@
                 <div class="form-group">
                     <input type="submit" class="btn btn-default" value="vote" ng-show="myVote.length == 0">
                     <!-- enable toggle -->
-                </div>
-                <div data-ng-show="error" class="text-danger">
-                  <strong data-ng-bind="error"></strong>
                 </div>
               </fieldset>
             </form>
@@ -52,6 +52,7 @@
             <span am-time-ago="answer.created"></span>
             by
             <span data-ng-bind="answer.user.username"></span>
+            <a data-ng-show="authentication.user._id == answer.user._id" href="/#!/answers/{{answer._id}}/edit">edit</a>
           </em>
         </small>
       </div>

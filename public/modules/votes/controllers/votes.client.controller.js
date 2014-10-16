@@ -13,7 +13,7 @@ angular.module('votes').controller('VotesController', ['$scope', '$stateParams',
 			});
 
 			vote.$save(function(response) {
-				$scope.findFor(response.answer)
+				$scope.findFor(response.answer);
 
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -64,7 +64,7 @@ angular.module('votes').controller('VotesController', ['$scope', '$stateParams',
 				answerId: answerId
 			}, function(votes) {
 				$scope.myVote = votes.filter(function(vote) {
-					return vote.user.username == user.username;
+					return vote.user.username === $scope.user.username;
 				});
 			});
 		};
