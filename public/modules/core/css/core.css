@@ -1,5 +1,5 @@
 .content {
-	margin-top: 80px;
+	margin-top: 60px;
 }
 .undecorated-link:hover {
 	text-decoration: none;
@@ -12,4 +12,8 @@
 }
 .ng-valid.ng-dirty{
     border-color:#78FA89;
+}
+
+textarea {
+  width: 100%;
 }

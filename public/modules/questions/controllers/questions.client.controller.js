@@ -9,7 +9,8 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$state
 		$scope.create = function() {
 			// Create new Question object
 			var question = new Questions ({
-				name: this.name
+				title: this.title,
+				detail: this.detail
 			});
 
 			// Redirect after save
@@ -17,7 +18,8 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$state
 				$location.path('questions/' + response._id);
 
 				// Clear form fields
-				$scope.name = '';
+				$scope.title = '';
+				$scope.detail = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -57,7 +59,7 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$state
 
 		// Find existing Question
 		$scope.findOne = function() {
-			$scope.question = Questions.get({ 
+			$scope.question = Questions.get({
 				questionId: $stateParams.questionId
 			});
 		};

@@ -1,24 +1,10 @@
 'use strict';
 
 // Votes controller
-angular.module('votes').controller('VotesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Votes', 'AnswerVotes',
-	function($scope, $stateParams, $location, Authentication, Votes, AnswerVotes ) {
+angular.module('votes').controller('VotesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Votes', 'AnswerVotes', 'Users',
+	function($scope, $stateParams, $location, Authentication, Votes, AnswerVotes, Users ) {
 		$scope.authentication = Authentication;
-
-		// Create new Vote
-		$scope.create = function() {
-			// Create new Vote object
-			var vote = new Votes ({
-				answer: this.answer._id
-			});
-
-			vote.$save(function(response) {
-				$scope.findFor(response.answer);
-
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
+		$scope.user = Authentication.user;
 
 		// Remove existing Vote
 		$scope.remove = function( vote ) {
@@ -56,16 +42,6 @@ angular.module('votes').controller('VotesController', ['$scope', '$stateParams',
 		$scope.findOne = function() {
 			$scope.vote = Votes.get({
 				voteId: $stateParams.voteId
-			});
-		};
-
-		$scope.findFor = function(answerId) {
-			$scope.votes = AnswerVotes.query({
-				answerId: answerId
-			}, function(votes) {
-				$scope.myVote = votes.filter(function(vote) {
-					return vote.user.username === $scope.user.username;
-				});
 			});
 		};
 	}

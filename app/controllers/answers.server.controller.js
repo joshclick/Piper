@@ -84,7 +84,7 @@ exports.list = function(req, res) { Answer.find().sort('-created').populate('use
 };
 
 exports.forQuestion = function(req, res) {
-	Answer.find({ question: req.question }).sort('-created').populate('user', 'username').exec(function(err, answers) {
+	Answer.find({ question: req.question }).sort('-created').populate('user', 'displayName acquiredVotes points').exec(function(err, answers) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

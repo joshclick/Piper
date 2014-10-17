@@ -10,10 +10,15 @@ var mongoose = require('mongoose'),
  * Question Schema
  */
 var QuestionSchema = new Schema({
-	name: {
+	title: {
 		type: String,
 		default: '',
-		required: 'Please fill Question name',
+		required: 'Please fill Question title',
+		trim: true
+	},
+	detail: {
+		type: String,
+		default: '',
 		trim: true
 	},
 	created: {

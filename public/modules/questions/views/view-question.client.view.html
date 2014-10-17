@@ -1,82 +1,61 @@
-<section data-ng-controller="QuestionsController" data-ng-init="findOne()">
-  <h2 data-ng-bind="question.name"></h2>
-  <div class="pull-right" data-ng-show="authentication.user._id == question.user._id">
-    <a class="btn btn-primary" href="/#!/questions/{{question._id}}/edit">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
+<section class="question" data-ng-controller="QuestionsController" data-ng-init="findOne()">
+  <h2 data-ng-bind="question.title"></h2>
+  <p data-ng-bind="question.detail"></p>
+  <div class="pull-right hidden" data-ng-show="authentication.user._id == question.user._id">
     <a class="btn btn-primary" data-ng-click="remove();">
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>
-  <small>
-    <em class="text-muted">
-      Asked
-      <span am-time-ago="question.created"></span>
-      by
-      <span data-ng-bind="question.user.username"></span>
-    </em>
-  </small>
 </section>
 
-<section data-ng-controller="AnswersController" data-ng-init="findFor()">
+<section data-ng-controller="AnswersController" data-ng-init="findForQuestion()">
   <section ng-show="answers.length">
-    <div class="page-header">
-        <h4>{{ answers.length }} Answers</h4>
-    </div>
-    <div class="list-group">
-      <div data-ng-repeat="answer in answers" class="list-group-item">
-        <div class="pull-right">
-          <input data-ng-controller="AnswersController" type="submit" data-ng-model="newPoints" class="btn btn-default" value="Donate Points" data-ng-submit="addPoints()">
-          <div ng-show="answer.points > 0">
-            Points: {{ answer.points }}
+    <h4 class="answer-count">{{ answers.length }} Answers</h4>
+    <div>
+      <div class="answer" data-ng-repeat="answer in answers">
+        <div class="user">
+          <div class="avatar">
+            <i class="glyphicon glyphicon-user"></i>
           </div>
-          <div data-ng-controller="VotesController" data-ng-init="findFor(answer._id)">
-            Votes: {{ votes.length }}
-            <form class="form-horizontal" data-ng-submit="create()" novalidate>
-              <fieldset>
-                <input type="hidden" data-ng-model="answer._id" id="answer">
-                <div class="form-group">
-                    <input type="submit" class="btn btn-default" value="vote" ng-show="myVote.length == 0">
-                    <!-- enable toggle -->
-                </div>
-              </fieldset>
-            </form>
-          </div>
+          <h4 data-ng-bind="answer.user.displayName"></h4>
+          <small class="text-muted">{{ answer.user.points ? answer.user.points + ' points, ' : '' }}{{ answer.user.acquiredVotes ? answer.user.acquiredVotes + ' votes' : '' }}{{ !answer.user.points && !answer.user.acquiredVotes ? 'Building a reputation' : '' }}</small>
         </div>
-
-        <h4 class="list-group-item-heading" data-ng-bind="answer.name"></h4>
-
-        <small>
-          <em class="text-muted">
-            Answered
-            <span am-time-ago="answer.created"></span>
-            by
-            <span data-ng-bind="answer.user.username"></span>
-            <a data-ng-show="authentication.user._id == answer.user._id" href="/#!/answers/{{answer._id}}/edit">edit</a>
-          </em>
+        <p class="content" data-ng-bind="answer.content"></p>
+        <small class="text-muted">
+          Answered <span am-time-ago="answer.created"></span>
         </small>
+        <div class="actions-bar">
+          <div data-ng-controller="AnswersController" class="data-button" data-ng-click="addPoints()">
+            <span ng-show="answer.points > 0">
+              {{ answer.points }}
+            </span>
+            Donate Points
+          </div>
+
+          <div class="data-button" data-ng-init="findVotes(answer._id)" data-ng-click="vote(answer._id)">
+            <span ng-show="votes.length > 0">
+              {{ votes.length }}
+            </span>
+            Vote
+          </div>
+
+          <a class="text-muted edit-button" data-ng-show="authentication.user._id == answer.user._id" href="/#!/answers/{{answer._id}}/edit">edit</a>
+        </div>
       </div>
     </div>
   </section>
   <section>
-    <div class="col-md-12">
-      <h4>Your Answer</h4>
-      <form class="form-horizontal" data-ng-submit="create()" novalidate>
-          <fieldset>
-              <div class="form-group">
-                  <label class="control-label" for="name">Name</label>
-                  <div class="controls">
-                      <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <input type="submit" class="btn btn-default">
-              </div>
-            <div data-ng-show="error" class="text-danger">
-              <strong data-ng-bind="error"></strong>
-            </div>
-          </fieldset>
-      </form>
-    </div>
+    <h4 data-ng-bind="user.displayName"></h4>
+    <form class="form-horizontal" data-ng-submit="create()" novalidate>
+      <fieldset>
+        <div class="controls">
+          <textarea data-ng-model="content" id="content" placeholder="Your Answer" required></textarea>
+        </div>
+        <input type="submit" class="btn btn-default">
+        <div data-ng-show="error" class="text-danger">
+          <strong data-ng-bind="error"></strong>
+        </div>
+      </fieldset>
+    </form>
   </section>
 </section>

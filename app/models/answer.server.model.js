@@ -10,10 +10,10 @@ var mongoose = require('mongoose'),
  * Answer Schema
  */
 var AnswerSchema = new Schema({
-	name: {
+	content: {
 		type: String,
 		default: '',
-		required: 'Please fill Answer name',
+		required: 'Please fill Answer content',
 		trim: true
 	},
 	points: {
