@@ -20,7 +20,7 @@
           <h4 data-ng-bind="answer.user.displayName"></h4>
           <small class="text-muted">{{ answer.user.points ? answer.user.points + ' points, ' : '' }}{{ answer.user.acquiredVotes ? answer.user.acquiredVotes + ' votes' : '' }}{{ !answer.user.points && !answer.user.acquiredVotes ? 'Building a reputation' : '' }}</small>
         </div>
-        <p class="content" data-ng-bind="answer.content"></p>
+        <p class="content" data-ng-bind-html="answer.content"></p>
         <small class="text-muted">
           Answered <span am-time-ago="answer.created"></span>
         </small>
@@ -49,7 +49,7 @@
     <form class="form-horizontal" data-ng-submit="create()" novalidate>
       <fieldset>
         <div class="controls">
-          <textarea data-ng-model="content" id="content" placeholder="Your Answer" required></textarea>
+          <text-angular data-ng-model="content" id="content" placeholder="Your Answer" ta-toolbar="[['bold','italics','underline','h1','pre','quote','ul','ol']]" required></text-angular>
         </div>
         <input type="submit" class="btn btn-default">
         <div data-ng-show="error" class="text-danger">

@@ -14,7 +14,8 @@ module.exports = {
 		lib: {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
-				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+				'public/lib/textAngular/src/textAngular.css',
+				'public/lib/font-awesome/css/font-awesome.css'
 			],
 			js: [
 				'public/lib/angular/angular.js',
@@ -26,7 +27,9 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/moment/moment.js',
-				'public/lib/angular-moment/angular-moment.js'
+				'public/lib/angular-moment/angular-moment.js',
+				'public/lib/textAngular/dist/textAngular-rangy.min.js',
+				'public/lib/textAngular/dist/textAngular.min.js'
 			]
 		},
 		css: [

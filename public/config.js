@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'piper';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils', 'angularMoment'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils', 'angularMoment', 'textAngular'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {

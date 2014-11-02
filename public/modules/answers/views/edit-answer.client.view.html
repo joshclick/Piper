@@ -6,9 +6,8 @@
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
                 <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="answer.name" id="name" class="form-control" placeholder="Name" required>
+                        <text-angular data-ng-model="answer.content" id="content" placeholder="Your Answer" ta-toolbar="[['bold','italics','underline','h1','pre','quote','ul','ol']]" required></text-angular>
                     </div>
                 </div>
                 <div class="form-group">
