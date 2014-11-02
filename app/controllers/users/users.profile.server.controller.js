@@ -54,3 +54,7 @@ exports.update = function(req, res) {
 exports.me = function(req, res) {
 	res.jsonp(req.user || null);
 };
+
+exports.read = function(req, res) {
+	res.jsonp(req.user);
+};

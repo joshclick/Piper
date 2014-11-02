@@ -13,13 +13,13 @@
     <h4 class="answer-count">{{ answers.length }} Answers</h4>
     <div>
       <div class="answer" data-ng-repeat="answer in answers">
-        <div class="user">
+        <a class="user" data-ng-href="#!/users/{{answer.user._id}}">
           <div class="avatar">
             <i class="glyphicon glyphicon-user"></i>
           </div>
           <h4 data-ng-bind="answer.user.displayName"></h4>
           <small class="text-muted">{{ answer.user.points ? answer.user.points + ' points, ' : '' }}{{ answer.user.acquiredVotes ? answer.user.acquiredVotes + ' votes' : '' }}{{ !answer.user.points && !answer.user.acquiredVotes ? 'Building a reputation' : '' }}</small>
-        </div>
+        </a>
         <p class="content" data-ng-bind-html="answer.content"></p>
         <small class="text-muted">
           Answered <span am-time-ago="answer.created"></span>
@@ -32,9 +32,9 @@
             Donate Points
           </div>
 
-          <div class="data-button" data-ng-init="findVotes(answer._id)" data-ng-click="vote(answer._id)">
-            <span ng-show="votes.length > 0">
-              {{ votes.length }}
+          <div class="data-button" data-ng-click="vote(answer._id)">
+            <span ng-show="answer.votes.length > 0">
+              {{ answer.votes.length }}
             </span>
             Vote
           </div>

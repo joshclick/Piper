@@ -66,6 +66,10 @@ angular.module('answers').controller('AnswersController', ['$scope', '$statePara
 		$scope.findForQuestion = function() {
 			$scope.answers = QuestionAnswers.query({
 				questionId: $stateParams.questionId
+			}, function(answers) {
+				answers.forEach(function(answer, i) {
+					answer.votes = $scope.findVotes(answer._id);
+				});
 			});
 		};
 
@@ -85,7 +89,7 @@ angular.module('answers').controller('AnswersController', ['$scope', '$statePara
 		};
 
 		$scope.findVotes = function(answerId) {
-			$scope.votes = AnswerVotes.query({
+			return AnswerVotes.query({
 				answerId: answerId
 			}, function(votes) {
 				$scope.myVote = votes.filter(function(vote) {
