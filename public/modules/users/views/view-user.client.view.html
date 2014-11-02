@@ -4,7 +4,7 @@
   <section ng-show="contributions.length">
     <h4 class="answer-count">{{ contributions.length }} Contributions</h4>
     <div>
-      <div class="answer" data-ng-repeat="contribution in contributions">
+      <div class="answer" data-ng-repeat="contribution in contributions | orderBy:'created':true">
         <h3><a ng-show="contribution.content || contribution.title" ng-bind="contribution.question.title || contribution.title" data-ng-href="#!/questions/{{contribution.question._id || contribution._id}}"></a></h3>
 
         <p class="content" ng-show="contribution.content" data-ng-bind-html="contribution.content"></p>
