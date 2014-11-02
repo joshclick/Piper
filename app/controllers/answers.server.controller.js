@@ -72,7 +72,7 @@ exports.delete = function(req, res) {
 /**
  * List of Answers
  */
-exports.list = function(req, res) { Answer.find().sort('-created').populate('user', 'username').exec(function(err, answers) {
+exports.list = function(req, res) { Answer.find().sort('-created').populate('user', 'username').populate('question', 'title').exec(function(err, answers) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

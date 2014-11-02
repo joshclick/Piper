@@ -56,5 +56,5 @@ exports.me = function(req, res) {
 };
 
 exports.read = function(req, res) {
-	res.jsonp(req.user);
+	res.jsonp(req.profile);
 };

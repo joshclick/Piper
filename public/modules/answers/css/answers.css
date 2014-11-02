@@ -3,16 +3,17 @@
   padding-bottom: 10px;
 }
 
-.user {
-  height: 40px;
-}
-
 .ta-toolbar, .ta-editor {
   margin-bottom: 10px;
 }
 
 .ta-editor.form-control {
   height: auto;
+}
+
+.user {
+  height: 40px;
+  color: #333;
 }
 
 .user .avatar {
@@ -40,6 +41,10 @@
   border-bottom: 1px solid #e2e2e2;
 }
 
+.answer a {
+  color: #333;
+}
+
 .answer .content {
   margin: 10px 0;
   font-family: serif;
@@ -47,7 +52,7 @@
 }
 
 .answer .content h1 {
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 .answer .edit-button {
